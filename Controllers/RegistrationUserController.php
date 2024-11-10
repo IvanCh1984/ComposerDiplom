@@ -37,7 +37,7 @@ class RegistrationUserController {
     {
         try {
             $this->auth->register($_POST['email_user'], $_POST['pass_user'], $_POST['name_user'], function ($selector, $token) {
-                $verification = "<a href='".$_SERVER['HTTP_REFERER'] . 'verification/' . \urlencode($selector) . '/' . \urlencode($token)."'>Verificate your account</a>";
+                $verification = "<a href='".$_SERVER['HTTP_REFERER'] . '/verification/' . \urlencode($selector) . '/' . \urlencode($token)."'>Verificate your account</a>";
                    SimpleMail::make()
                            ->setTo($_POST['name_user'], $_POST['email_user'])
                            ->setFrom('info@example.com', 'Admin')
@@ -73,7 +73,7 @@ class RegistrationUserController {
     public function verificationUser()
     {
         try {
-            $this->auth->confirmEmailAndSignIn('_e6imeOEiHPBkDzt', 'hXlsqmkjo-YVKIdM');
+            $this->auth->confirmEmail($_GET['selector'], $_GET['token']);
 
             Flash::message('Почта успешно подтверждена', 'success');
             echo $this->templates->render('login');

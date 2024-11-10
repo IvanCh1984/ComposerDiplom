@@ -39,8 +39,8 @@ $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
 
     $r->addRoute( httpMethod:'POST', route: '/registerUser', handler: ['Controllers\RegistrationUserController', 'registerUser']);
 
-    //$r->addRoute(httpMethod:'GET', route:'/registerUserverification/{selector:.+}/{token:.+}', handler:['App\Controllers\RegistrationUserController', 'verificationUser']);
-    //$r->addRoute(httpMethod:'GET', route:'/verification', handler:['App\Controllers\RegistrationUserController', 'verificationUser']);
+    $r->addRoute(httpMethod:'GET', route:'/verification/{selector:.+}/{token:.+}', handler:['Controllers\RegistrationUserController', 'verificationUser']);
+    
 
     $r->addRoute(httpMethod:'GET', route:'/login', handler:['Controllers\RegistrationUserController', 'login']);
 
