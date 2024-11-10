@@ -37,7 +37,8 @@ class RegistrationUserController {
     {
         try {
             $this->auth->register($_POST['email_user'], $_POST['pass_user'], $_POST['name_user'], function ($selector, $token) {
-                $verification = "<a href='".$_SERVER['HTTP_REFERER'] . '/verification/' . \urlencode($selector) . '/' . \urlencode($token)."'>Verificate your account</a>";
+                //$verification = "<a href='".$_SERVER['HTTP_REFERER'] . '/verification/' . \urlencode($selector) . '/' . \urlencode($token)."'>Verificate your account</a>";
+                $verification = "<a href='".$_SERVER['HTTP_REFERER'] . 'verification/' . \urlencode($selector) . '/' . \urlencode($token)."'>Verificate your account</a>";
                    SimpleMail::make()
                            ->setTo($_POST['name_user'], $_POST['email_user'])
                            ->setFrom('info@example.com', 'Admin')
@@ -70,13 +71,17 @@ class RegistrationUserController {
         }
     }
 
-    public function verificationUser()
+    public function verificationUser($data)
     {
         try {
-            $this->auth->confirmEmail($_GET['selector'], $_GET['token']);
+            // тут не будет гет-параметров, так как ты их передал массивом в index.php
+            // и поэтому ты должен принять их в методе как параметр
+            //$this->auth->confirmEmail($_GET['selector'], $_GET['token']);
+            $this->auth->confirmEmail($data['selector'], $data['token']);
 
             Flash::message('Почта успешно подтверждена', 'success');
-            echo $this->templates->render('login');
+            //echo $this->templates->render('login'); // тут ты должен перенаправить пользователя на страницу входа
+            header('Location: /login');
         }
         catch (\Delight\Auth\InvalidSelectorTokenPairException $e) {
             die('Invalid token');
