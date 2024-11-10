@@ -1,7 +1,7 @@
-<?php 
+<?php
 
-if ( ! session_id () ) {
-    session_start ();
+if (!session_id()) {
+    session_start();
 }
 
 require '../vendor/autoload.php';
@@ -15,39 +15,39 @@ use Database\Connection;
 
 $containerbuilder = new ContainerBuilder();
 
-$containerbuilder -> addDefinitions([
+$containerbuilder->addDefinitions([
 
-    Engine::class => function() {
+    Engine::class => function () {
         return new Engine("../views/");
     },
 
-    Auth::class => function() {
+    Auth::class => function () {
         return new Auth(Connection::getInstance());
     },
 
-    QueryFactory::class => function() {
+    QueryFactory::class => function () {
         return new QueryFactory('mysql');
     }
-    
+
 ]);
 
-$container = $containerbuilder -> build();
+$container = $containerbuilder->build();
 
-$dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
+$dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) {
 
-    $r->addRoute( httpMethod:'GET', route: '/', handler: ['Controllers\HomeController', 'index']);
+    $r->addRoute(httpMethod: 'GET', route: '/', handler: ['Controllers\HomeController', 'index']);
 
-    $r->addRoute( httpMethod:'POST', route: '/registerUser', handler: ['Controllers\RegistrationUserController', 'registerUser']);
+    $r->addRoute(httpMethod: 'POST', route: '/registerUser', handler: ['Controllers\RegistrationUserController', 'registerUser']);
 
-    $r->addRoute(httpMethod:'GET', route:'/verification/{selector:.+}/{token:.+}', handler:['Controllers\RegistrationUserController', 'verificationUser']);
-    
+    $r->addRoute(httpMethod: 'GET', route: '/verification/{selector:.+}/{token:.+}', handler: ['Controllers\RegistrationUserController', 'verificationUser']);
 
-    $r->addRoute(httpMethod:'GET', route:'/login', handler:['Controllers\RegistrationUserController', 'login']);
 
-    $r->addRoute(httpMethod:'POST', route:'/loginUser', handler:['Controllers\RegistrationUserController', 'loginUser']);
-    $r->addRoute(httpMethod:'GET', route:'/logOut', handler:['Controllers\RegistrationUserController', 'logOut']);
+    $r->addRoute(httpMethod: 'GET', route: '/login', handler: ['Controllers\RegistrationUserController', 'login']);
 
-    $r->addRoute(httpMethod:'GET', route:'/users', handler:['Controllers\ShowUserController', 'index']);
+    $r->addRoute(httpMethod: 'POST', route: '/loginUser', handler: ['Controllers\RegistrationUserController', 'loginUser']);
+    $r->addRoute(httpMethod: 'GET', route: '/logOut', handler: ['Controllers\RegistrationUserController', 'logOut']);
+
+    $r->addRoute(httpMethod: 'GET', route: '/users', handler: ['Controllers\ShowUserController', 'index']);
 
     //$r->addRoute('GET', '/users', 'get_all_users_handler');
     // {id} must be a number (\d+)
@@ -80,7 +80,7 @@ switch ($routeInfo[0]) { // почему тут используется име�
         $controller = $routeInfo[1][0];
         $action = $routeInfo[1][1];
         $vars = $routeInfo[2];
-        $container -> call([$controller, $action], [$vars]);
+        $container->call([$controller, $action], [$vars]);
 
         break;
 }
