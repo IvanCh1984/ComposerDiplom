@@ -9,18 +9,22 @@ use Tamtamchik\SimpleFlash\Flash;
 
 $flash = new Flash();
 
+// почему тут опять вызыешь новое подключение?
 $db = new PDO("mysql:host=localhost;dbname=my_project;charset=utf8", "root", "");
 $auth = new Auth($db);
 
-if ( $auth -> isLoggedIn ()) {
+if ($auth->isLoggedIn()) {
     Flash::message('Пользователь вошел в систему!', 'success');
-}
-else {
+} else {
     header('Location: login');
 }
 
 ?>
 
+
+<!--
+вот эту шапку можно вынести в отдельный шаблон чтобы каждый раз не копировать её
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
