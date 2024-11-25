@@ -37,23 +37,38 @@ $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
 
     $r->addRoute( httpMethod:'GET', route: '/', handler: ['Controllers\HomeController', 'index']);
 
+    $r->addRoute( httpMethod:'GET', route: '/register', handler: ['Controllers\RegistrationUserController', 'register']);
     $r->addRoute( httpMethod:'POST', route: '/registerUser', handler: ['Controllers\RegistrationUserController', 'registerUser']);
 
-    $r->addRoute(httpMethod:'GET', route:'/verification/{selector:.+}/{token:.+}', handler:['Controllers\RegistrationUserController', 'verificationUser']);
+    //$r->addRoute(httpMethod:'GET', route:'/verification?selector&token', handler:['Controllers\RegistrationUserController', 'verificationUser']);
     
 
     $r->addRoute(httpMethod:'GET', route:'/login', handler:['Controllers\RegistrationUserController', 'login']);
-
     $r->addRoute(httpMethod:'POST', route:'/loginUser', handler:['Controllers\RegistrationUserController', 'loginUser']);
     $r->addRoute(httpMethod:'GET', route:'/logOut', handler:['Controllers\RegistrationUserController', 'logOut']);
 
-    $r->addRoute(httpMethod:'GET', route:'/users', handler:['Controllers\ShowUserController', 'index']);
+    $r->addRoute(httpMethod:'GET', route:'/createUser', handler:['Controllers\CreateUserController', 'index']);
+    $r->addRoute(httpMethod:'POST', route:'/insertUser', handler:['Controllers\CreateUserController', 'insertUser']);
 
-    //$r->addRoute('GET', '/users', 'get_all_users_handler');
-    // {id} must be a number (\d+)
-    //$r->addRoute('GET', '/user/{id:\d+}', 'get_user_handler');
-    // The /{title} suffix is optional
-    //$r->addRoute('GET', '/articles/{id:\d+}[/{title}]', 'get_article_handler');
+    $r->addRoute(httpMethod:'GET', route:'/pageProfile', handler:['Controllers\PageProfileUserController', 'index']);
+
+    $r->addRoute(httpMethod:'GET', route:'/edit', handler:['Controllers\EditUserController', 'index']);
+    $r->addRoute(httpMethod:'POST', route:'/updateInfo', handler:['Controllers\EditUserController', 'updateInfo']);
+
+    $r->addRoute(httpMethod:'GET', route:'/security', handler:['Controllers\SecurityUserController', 'index']);
+    $r->addRoute(httpMethod:'POST', route:'/updateRegister', handler:['Controllers\SecurityUserController', 'updateRegister']);
+
+    $r->addRoute(httpMethod:'GET', route:'/status', handler:['Controllers\StatusUserController', 'index']);
+    $r->addRoute(httpMethod:'POST', route:'/editStatus', handler:['Controllers\StatusUserController', 'editStatus']);
+
+    $r->addRoute(httpMethod:'GET', route:'/avatar', handler:['Controllers\AvatarUserController', 'index']);
+    $r->addRoute(httpMethod:'POST', route:'/downloadAvatar', handler:['Controllers\AvatarUserController', 'downloadAvatar']);
+
+    $r->addRoute(httpMethod:'GET', route:'/socialLinks', handler:['Controllers\SocialLnksUserController', 'index']);
+    $r->addRoute(httpMethod:'POST', route:'/addSocialLinks', handler:['Controllers\SocialLnksUserController', 'addSocialLinks']);
+
+    $r->addRoute(httpMethod:'GET', route:'/delete', handler:['Controllers\DeleteUserController', 'deleteUser']);
+    
 });
 
 $httpMethod = $_SERVER['REQUEST_METHOD'];

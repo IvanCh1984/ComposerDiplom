@@ -21,9 +21,10 @@ class RegistrationUserController {
 
     }
 
-    public function index() {
+    public function register() {
 
-        echo $this -> templates -> render('index_view');
+        echo $this -> templates -> render('register');
+
 
     }
 
@@ -35,9 +36,10 @@ class RegistrationUserController {
 
     public function registerUser()
     {
-        try {
-            $this->auth->register($_POST['email_user'], $_POST['pass_user'], $_POST['name_user'], function ($selector, $token) {
-                $verification = "<a href='".$_SERVER['HTTP_REFERER'] . '/verification/' . \urlencode($selector) . '/' . \urlencode($token)."'>Verificate your account</a>";
+        try { 
+            $this -> auth-> admin() -> createUser($_POST['email'], $_POST['password'], $_POST['name']); /*{
+                //$verification = "<a href='".$_SERVER['HTTP_REFERER'] . '/verification/' . \urlencode($selector) . '/' . \urlencode($token)."'>Verificate your account</a>";
+                
                    SimpleMail::make()
                            ->setTo($_POST['name_user'], $_POST['email_user'])
                            ->setFrom('info@example.com', 'Admin')
@@ -46,11 +48,11 @@ class RegistrationUserController {
                            ->setHtml()
                            ->send();                                                     
             
-            });
+            });*/
             
             
             Flash::message('Вы успешно зарегистрировались!', 'success');
-            echo $this->templates->render('login');
+            header('Location: login');
         }
         catch (\Delight\Auth\InvalidEmailException $e) {
             Flash::message('Неверный адрес электронной почты!', 'error');
@@ -97,7 +99,8 @@ class RegistrationUserController {
         try {
             $this->auth->login($_POST['email_user'], $_POST['pass_user']);
             Flash::message('Главная страница', 'success');
-            echo $this -> templates -> render('users');
+            Flash::message($_SESSION['auth_username'] . ': вошел(а) на стриницу', 'success');
+            header('Location: /');
             
         }
         catch (\Delight\Auth\InvalidEmailException $e) {
@@ -122,7 +125,7 @@ class RegistrationUserController {
     public function logOut()
     {
         $this->auth->logOut();
-        echo $this -> templates -> render('index_view');
+        header('Location: login');
     }
 
 }
