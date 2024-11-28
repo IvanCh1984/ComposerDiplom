@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Ноя 10 2024 г., 21:05
+-- Время создания: Ноя 28 2024 г., 21:07
 -- Версия сервера: 5.7.39
 -- Версия PHP: 8.0.22
 
@@ -79,35 +79,34 @@ INSERT INTO `post` (`id`, `title`, `content`) VALUES
 
 CREATE TABLE `users` (
   `id` int(10) UNSIGNED NOT NULL,
-  `email` varchar(249) NOT NULL,
-  `password` varchar(255) NOT NULL,
+  `email` varchar(249) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
   `username` varchar(100) DEFAULT NULL,
   `status` tinyint(2) UNSIGNED NOT NULL DEFAULT '0',
   `verified` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
   `resettable` tinyint(1) UNSIGNED NOT NULL DEFAULT '1',
-  `roles_mask` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `registered` int(10) UNSIGNED NOT NULL,
+  `roles_mask` int(10) UNSIGNED NOT NULL DEFAULT '2',
+  `registered` int(10) UNSIGNED DEFAULT NULL,
   `last_login` int(10) UNSIGNED DEFAULT NULL,
   `force_logout` mediumint(7) UNSIGNED NOT NULL DEFAULT '0',
-  `role` varchar(255) NOT NULL DEFAULT 'user'
+  `avatar` varchar(255) DEFAULT NULL,
+  `job` varchar(255) DEFAULT NULL,
+  `phone` varchar(255) DEFAULT NULL,
+  `adress` varchar(255) DEFAULT NULL,
+  `status_info` varchar(255) CHARACTER SET utf32 DEFAULT NULL,
+  `vk` varchar(255) DEFAULT NULL,
+  `telegram` varchar(255) DEFAULT NULL,
+  `instagram` varchar(255) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `users`
 --
 
-INSERT INTO `users` (`id`, `email`, `password`, `username`, `status`, `verified`, `resettable`, `roles_mask`, `registered`, `last_login`, `force_logout`, `role`) VALUES
-(23, 'Pepe@example.com', '$2y$10$lhvcSeAfAKp3uyPePSVrFOY.BayttSNlE1YAIuZM3e0UMcOaIzNJS', 'Pepe', 0, 1, 1, 1, 1730645189, 1730653473, 0, 'user'),
-(22, 'John@example.com', '$2y$10$OngKzE0qYj27p1y6Es6v0OYWZD0NI3XzoThkpbAmIv/92GHKZEuYe', 'John', 0, 0, 1, 0, 1730635651, NULL, 0, 'user'),
-(21, 'Mave@example.com', '$2y$10$3BOOnsBxo4VCwTR8Z7XCruksDau0PzmenjARUO.3tgiAKA/ISSsse', 'Mave', 0, 1, 1, 0, 1730565329, 1730566157, 0, 'user'),
-(20, 'Mark@example.com', '$2y$10$2vGh0g6eiyRkhYiifxRW5.VXD3cWqsmVo83msClMWstHV5CFzZgpC', 'Mark', 0, 1, 1, 0, 1730556304, 1730557199, 0, 'user'),
-(19, 'Bob@example.com', '$2y$10$xAAnJkFD31jXO47bW/4RpejGefkg/AaXqx0NolqTk25Nh9OXX7bUC', 'Bob', 0, 0, 1, 0, 1730546470, NULL, 0, 'user'),
-(18, 'Igor@example.com', '$2y$10$Ca1sMjM7f0zq6mBt2QwP4u256HhRE3xa0GHO26lVk6u2wWxbhRyEO', 'Igor', 0, 0, 1, 0, 1730545684, NULL, 0, 'user'),
-(17, 'Max@example.com', '$2y$10$z1UMyJUp8vmBzDgTMYEWe.uLYgAIlumZbpeay6bVPxIjQrS.q24uu', 'Max', 0, 0, 1, 0, 1730543519, NULL, 0, 'user'),
-(14, 'Ivan@example.com', '$2y$10$InHFGUnPg9LXfdwtkrHmie1NCinQrHnKY4XM8IaEOGW2/mttkCvma', 'Ivan', 0, 0, 1, 0, 1730490506, NULL, 0, 'user'),
-(15, 'July@example.com', '$2y$10$61VjzI0eIdpM.bbHxQNsfOgyQk0yclpQwUwz3bFL9lBJdgodkBNrK', 'July', 0, 0, 1, 0, 1730491607, NULL, 0, 'user'),
-(16, 'Bebe@example.com', '$2y$10$o2pEA0JPZcxE9NzrABgy3O4NWCzw2M382cfy3rTySOg6bwtcWizoW', 'Bebe', 0, 1, 1, 0, 1730492843, 1731243710, 0, 'user'),
-(24, 'Pasha@example.com', '$2y$10$xqfHCSLsjNLolBW.xnhLTOUg7S7Vd96TZKYCZzt7CGAty3dnDurw2', 'Pasha', 0, 0, 1, 0, 1730900263, NULL, 0, 'user');
+INSERT INTO `users` (`id`, `email`, `password`, `username`, `status`, `verified`, `resettable`, `roles_mask`, `registered`, `last_login`, `force_logout`, `avatar`, `job`, `phone`, `adress`, `status_info`, `vk`, `telegram`, `instagram`) VALUES
+(46, 'Oliver.kopyov@smartadminwebapp.com', '$2y$10$C3F1dtE9Dm0Yu.JgmfG0/uZvV1yZ7JudrjE1FOFUjUICCZjNSt1nm', 'Oliver', 0, 1, 1, 1, 1732113672, 1732816438, 0, '6744309d1161c.png', 'IT Director, Gotbootstrap Inc.', '+1 317-456-2564', '15 Charist St, Detroit, MI, 48212, USA', 'Онлайн', NULL, NULL, NULL),
+(47, 'Alita@smartadminwebapp.com', '$2y$10$UQBkZqwWbpamGj.PninTz..HPQSi2KeS4tSpyk7f1QN/57XU9N5ga', 'Alita Gray', 0, 1, 1, 2, 1732177456, 1732522240, 0, '6744422f10415.png', 'Human Resources, Gotbootstrap Inc.', '+1 313-779-8134', '55 Smyth Rd, Detroit, MI, 48341, USA', 'Онлайн', 'Alita_vk.com', 'Alita_telegram.com', 'Alita_instagram.com'),
+(98, 'oleg@example.com', '$2y$10$p58YvimmdE3LC0SLjtSiGOwEmw0/qUgc3YkdD14JwHODjpTiaa5oy', 'Oleg', 0, 1, 1, 2, 1732528562, NULL, 0, '674449d4150ae.png', ' Gotbootstrap Inc.', '+1 317-456-2555', '55 Smyth Rd, Detroit, MI, 48341, USA', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -138,31 +137,6 @@ CREATE TABLE `users_confirmations` (
   `token` varchar(255) NOT NULL,
   `expires` int(10) UNSIGNED NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
---
--- Дамп данных таблицы `users_confirmations`
---
-
-INSERT INTO `users_confirmations` (`id`, `user_id`, `email`, `selector`, `token`, `expires`) VALUES
-(2, 2, 'Ivan@example.com', '6Lxbek95LFyKlNij', '$2y$10$n9UjxbwjORTC2DqBsq7XGeVwJ0s9p/2xwN1c3Ch/LYu8iiC55qX4a', 1730282641),
-(3, 3, 'July@example.com', 'How8S9qYXQoxh3Yc', '$2y$10$81zsctpWgFT8PlLOrur1zukd1iM80QQOLrpjDFKVRst10dvW/ESAG', 1730317990),
-(4, 4, 'Igor@example.com', '1F-lsvsxfaEDb0mT', '$2y$10$ohBntKK4VKwyDa14VjPXzedDPPgRkUq/lThPxJ4lQVv/vNkyWFNcG', 1730320486),
-(5, 5, 'Bob@example.com', 'suVQ5Vz2FqtfaLJJ', '$2y$10$SRRW2XqVFkyAOT/P5r8fmOgXkXsBBoW9IH1hRPqwa5F5eT2kKf8ZC', 1730321160),
-(6, 6, 'Mary@example.com', 'zTK3sdMbgZCGEqSN', '$2y$10$TnVOnimukpLrHuYfIq6JEuQiYNVxJPsIFFW0uSq2tp8DjzBYuFjai', 1730371406),
-(7, 7, 'Alex@example.com', 'W7OfAPgx8epcwrgY', '$2y$10$5Y6lM6unBSo3yrpPg0i.FO512TtUWkWFADzi8sSmJu26jrgs2fySG', 1730480855),
-(8, 8, 'Jane@example.com', 'LJgEZA8Yr6Y0QJRM', '$2y$10$9jXTDWksLpCV.b4SXPPYS.P45YFlbbOHquLSFIowcVM289WcrYCoC', 1730554247),
-(9, 9, 'Bony@example.com', 'HJkUGxOggMAsM-Zf', '$2y$10$8mowhkt7OKhz3R4HxKHepuPYE1e0ffJlwu58Z9xVc3fvzpp263Qoa', 1730555877),
-(10, 10, 'Ilon@example.com', 'C4WMqXq9SGRP8okE', '$2y$10$O4yW5xBOiCCYlGCIp2k.BOk853ehQRYcO2CoGBrRWgYqi4OvwMDve', 1730556226),
-(11, 11, 'Anna@example.com', 'V2MZOZ7uIhby9HWp', '$2y$10$5At3/kevAo26bzjl6QLVz.3QBqbV2F0UDerm.o772wzlQ9ki0h.6e', 1730556708),
-(12, 12, 'Rr@example.com', 'uAr3hQ9M3xHGMyLl', '$2y$10$ii/lJKSIc3D9y.Jjx3MOZ.khV4mNBaDRPmitItryfd7skA/h/XqpK', 1730557245),
-(13, 13, 'Oop@example.com', 'PkvSmnrfoNCwF9Gf', '$2y$10$JCFXvNbdC5zChHPjC2TzAO1cfALP.c3lAoB63abWlnAEV.WElbx8O', 1730560785),
-(14, 14, 'Ivan@example.com', 'dV-jh23frotLu2NE', '$2y$10$ZBiqJAgMUZabJxTJjcEXVuOUnPQDn9YetD8vmbIgCzIpfQTWPa.Y6', 1730576906),
-(15, 15, 'July@example.com', 'iR7v9KNavUUOttQP', '$2y$10$f11NkJdFQcKi7hgXze0.EONR0j/DOTYS2U3K02OTwf5kmMzOAPtXS', 1730578007),
-(17, 17, 'Max@example.com', 'cCeaK7GFwcoBpCWa', '$2y$10$t.BRWZmBq/vXikCWoi6VNeaaMDbGFTiAkBeBntPSz5ZY25gmW7Iuy', 1730629919),
-(18, 18, 'Igor@example.com', 'oCHTrEAK6KpY9uWQ', '$2y$10$2CCBkgpj3k9mC/WE8qKd5udjMQnhLS/49PzaRvjHP.n15KNTNdtHG', 1730632084),
-(19, 19, 'Bob@example.com', 'YHgazN4LmaEAuhwn', '$2y$10$RJoTGkTwp0PJfCUM8Pi4WOiS/jV/jOtOyGsrJ6ucXFytzRFz/cxpK', 1730632870),
-(22, 22, 'John@example.com', '47l07fhqDuYiiOCu', '$2y$10$Vg3vCaBi7M2RIDdla0w/M.fEKnDnoaPgrF5qd27sQwKWErOS9h3tm', 1730722051),
-(24, 24, 'Pasha@example.com', '3LWViaZB74shtIMt', '$2y$10$83zYPoXYcMT/nIo4ue5i2ejaVLHXixtp/032B.9CCA9bJaNmVpXBO', 1730986663);
 
 -- --------------------------------------------------------
 
@@ -226,13 +200,8 @@ CREATE TABLE `users_throttling` (
 --
 
 INSERT INTO `users_throttling` (`bucket`, `tokens`, `replenished_at`, `expires_at`) VALUES
-('py90jzaAqDRiDAr0XWq5MjGK_KelKoHOrEMJ_uKYlZE', 21.305, 1731253287, 1731325287),
-('QG-7mhO6KMAQVd27hY19XX1a63Bor0g5I5PFXNbxqNI', 21.305, 1731253287, 1731325287),
-('4v8npHQs7oK-g8tXonUC2IGpD4Hx9GW6bHPsZ8NAoLU', 28, 1730645371, 1730717371),
-('afEvVlD9vPyxr5TlE3igfuJxDIZM41RAGIKVcpyUGFA', 28, 1730645371, 1730717371),
-('HIJQJPUQ2qyyTt0Q7_AuZA0pXm27czJnqpJsoA5IFec', 42.175, 1731253287, 1731325287),
-('PZ3qJtO_NLbJfRIP-8b4ME4WA3xxc6n9nbCORSffyQ0', 4, 1730900268, 1731332268),
-('QduM75nGblH2CDKFyk0QeukPOwuEVDAUFE54ITnHM38', 74, 1731243710, 1731783710);
+('PZ3qJtO_NLbJfRIP-8b4ME4WA3xxc6n9nbCORSffyQ0', 3.00769, 1732528562, 1732960562),
+('QduM75nGblH2CDKFyk0QeukPOwuEVDAUFE54ITnHM38', 74, 1732816438, 1733356438);
 
 --
 -- Индексы сохранённых таблиц
@@ -312,7 +281,7 @@ ALTER TABLE `post`
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=99;
 
 --
 -- AUTO_INCREMENT для таблицы `users_2fa`
@@ -324,7 +293,7 @@ ALTER TABLE `users_2fa`
 -- AUTO_INCREMENT для таблицы `users_confirmations`
 --
 ALTER TABLE `users_confirmations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT для таблицы `users_otps`
